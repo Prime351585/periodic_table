@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&family=JetBrains+Mono:wght@100;400&display=swap');
+
+:root {
+    --bg-color: #050510;
+    --text-color: #ffffff;
+    --accent-color: #3dff51;
+    --glass-bg: rgba(0, 0, 0, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow: hidden;
+}
+
+.mono {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* UI Components */
+.overlay-title {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.overlay-title h1 {
+    font-size: 5rem;
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    opacity: 0.1;
+    text-transform: uppercase;
+    color: white;
+}
+
+.element-details {
+    position: absolute;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    z-index: 20;
+
+    /* Desktop Default Styling */
+    bottom: 40px;
+    right: 40px;
+    width: 400px;
+    border-radius: 24px;
+    max-height: calc(100vh - 120px);
+    /* Prevents top cutoff */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.details-scroll-container {
+    width: 100%;
+}
+
+/* Desktop inner-spacing managed by wrapper padding when not mobile */
+@media (min-width: 769px) {
+    .element-details {
+        padding: 32px;
+    }
+}
+
+.details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+}
+
+.atomic-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.element-name {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-top: -5px;
+}
+
+.element-symbol {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.category-badge {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.element-summary {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stat-label {
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+}
+
+.stat-value {
+    font-size: 0.8rem;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.instructions {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.7rem;
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+
+.loading-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: var(--bg-color);
+    color: white;
+}
+
+.loading-text {
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 0.5em;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Scrollbar removal utility */
+.no-scrollbar::-webkit-scrollbar {
+    display: none !important;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+}
+
+@media (max-width: 768px) {
+    .element-details {
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        border-radius: 24px 24px 0 0 !important;
+        padding: 0 !important;
+        max-height: 60vh;
+        /* Controlled by inner scroll container */
+        overflow: hidden;
+    }
+
+    .details-scroll-container {
+        padding: 24px 24px 80px 24px;
+        /* Extra bottom padding to prevent content cutoff */
+        max-height: 60vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .element-name {
+        font-size: 1.8rem;
+    }
+
+    .stats-grid {
+        gap: 8px;
+    }
+
+    .stat-card {
+        padding: 8px;
+    }
+}
